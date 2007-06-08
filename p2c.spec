@@ -1,6 +1,6 @@
 %define	name	p2c
 %define	version	1.22
-%define	rel	12
+%define	rel	13
 %define	release	%mkrel %{rel}
 
 Summary:	A Pascal to C translator
@@ -11,10 +11,10 @@ License:	GPL
 Group:		Development/Other
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
 URL:		http://www.synaptics.com/people/daveg/
-Patch2:		p2c-newpatch.patch.bz2
+Patch2:		p2c-newpatch.patch
+# Fixes conflicting types for 'my_memcpy' build error: thanks Anssi
+Patch3:		p2c-1.22-memcpy.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Obsoletes:	basic
-Provides:	basic
 
 %description
 P2c is a system for translating Pascal programs into the C language.
@@ -41,6 +41,7 @@ Install the p2c-devel package if you want to do p2c development.
 %prep
 %setup -q
 %patch2 -p1 -b .new
+%patch3 -p1 -b .memcpy
 mkdir src/shlib
 mkdir include
 ln -s ../src include/p2c
