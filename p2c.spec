@@ -14,7 +14,6 @@ URL:		http://www.synaptics.com/people/daveg/
 Patch2:		p2c-newpatch.patch
 # Fixes conflicting types for 'my_memcpy' build error: thanks Anssi
 Patch3:		p2c-1.22-memcpy.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 P2c is a system for translating Pascal programs into the C language.
