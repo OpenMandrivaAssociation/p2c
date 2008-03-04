@@ -1,12 +1,11 @@
 %define	name	p2c
 %define	version	1.22
-%define	rel	13
-%define	release	%mkrel %{rel}
+%define	release	
 
 Summary:	A Pascal to C translator
 Name:		%{name}
 Version:	%{version}
-Release:	%{release}
+Release:	%mkrel 14
 License:	GPL
 Group:		Development/Other
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
