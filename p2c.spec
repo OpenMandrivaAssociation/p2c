@@ -1,11 +1,9 @@
 %define	name	p2c
 %define	version	1.22
-%define	release	
-
 Summary:	A Pascal to C translator
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 15
+Release:	%mkrel 16
 License:	GPL
 Group:		Development/Other
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
@@ -13,6 +11,7 @@ URL:		http://www.synaptics.com/people/daveg/
 Patch2:		p2c-newpatch.patch
 # Fixes conflicting types for 'my_memcpy' build error: thanks Anssi
 Patch3:		p2c-1.22-memcpy.patch
+Patch4:		p2c-1.22-getline.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -41,6 +40,7 @@ Install the p2c-devel package if you want to do p2c development.
 %setup -q
 %patch2 -p1 -b .new
 %patch3 -p1 -b .memcpy
+%patch4 -p0 -b .getline
 mkdir src/shlib
 mkdir include
 ln -s ../src include/p2c
