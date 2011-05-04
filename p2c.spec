@@ -3,7 +3,7 @@
 Summary:	A Pascal to C translator
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 18
+Release:	%mkrel 19
 License:	GPL
 Group:		Development/Other
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
