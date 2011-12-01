@@ -53,7 +53,7 @@ make RPM_OPTS="$RPM_OPT_FLAGS -fPIC" shlib -C src
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_mandir}/man1,%{_prefix}/lib,%{_libdir},%{_includedir}}
-make install RPM_INSTALL=%{buildroot} LIBDIR=$RPM_BUILD_ROOT%{_libdir} MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1
+make install RPM_INSTALL=%{buildroot} LIBDIR=%{buildroot}%{_libdir} MANDIR=%{buildroot}%{_mandir}/man1
 
 %if %mdkversion < 200900
 %post -p /sbin/ldconfig
