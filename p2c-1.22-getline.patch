@@ -1,0 +1,109 @@
+--- src/parse.c~	1999-03-16 16:28:20.000000000 +0100
++++ src/parse.c	2009-10-04 09:06:00.000000000 +0200
+@@ -5081,7 +5081,7 @@
+ 	out_include(fname, 1);
+     outsection(majorspace);
+     pop_input();
+-    getline();
++    getline_();
+     gettok();
+ }
+ 
+--- src/p2c.hdrs~	1999-03-16 16:28:20.000000000 +0100
++++ src/p2c.hdrs	2009-10-04 09:05:42.000000000 +0200
+@@ -169,7 +169,7 @@
+ extern void     clearprogress      PV();
+ extern void     progress           PV();
+ extern void     replacestrings     PP( (char *buf, Strlist *sl) );
+-extern void     getline            PV();
++extern void     _getline            PV();
+ extern void     push_input_file    PP( (FILE *fp, char *fname, int isinclude) );
+ extern void     include_as_import  PV();
+ extern void     push_input_strlist PP( (Strlist *sp, char *fname) );
+--- src/lex.c~	1999-03-16 16:28:20.000000000 +0100
++++ src/lex.c	2009-10-04 09:07:07.000000000 +0200
+@@ -1045,7 +1045,7 @@
+ 
+ 
+ 
+-void getline()
++void getline_()
+ {
+     char *cp, *cp2;
+ 
+@@ -1072,7 +1072,7 @@
+ 			infname = stralloc(cp);
+ 			infname[cp2 - cp] = 0;
+ 		    }
+-		    getline();
++		    getline_();
+ 		    return;
+ 		}
+ 		if (copysource && *inbuf) {
+@@ -1089,7 +1089,7 @@
+                     fprintf(stderr, "\n");
+                 if (inputkind == INP_INCFILE) {
+                     pop_input();
+-                    getline();
++                    getline_();
+                 } else
+                     strcpy(inbuf, "\001");
+             }
+@@ -2385,7 +2385,7 @@
+ 		else
+ 		    commentline(CMT_POST);
+ 		trailing = 0;
+-                getline();
++                getline_();
+ 		i = 0;
+ 		for (;;) {
+ 		    if (*inbufptr == ' ') {
+@@ -2437,7 +2437,7 @@
+         if (isspace(*inbufptr)) {
+             inbufptr++;
+         } else if (!*inbufptr) {
+-            getline();
++            getline_();
+         } else if (*inbufptr == '{') {
+             inbufptr++;
+             comment(0);
+@@ -2531,7 +2531,7 @@
+         switch (*inbufptr++) {
+ 
+             case 0:
+-                getline();
++                getline_();
+                 break;
+ 
+             case ' ':
+@@ -2783,7 +2783,7 @@
+             case 0:
+ 	        if (commenting_flag)
+ 		    saveinputcomment(inbufptr-1);
+-                getline();
++                getline_();
+ 		cp = curtokbuf;
+ 		for (;;) {
+ 		    inbufindent = 0;
+@@ -2800,7 +2800,7 @@
+ 		    }
+ 		    if (!*inbufptr && !commenting_flag) {   /* blank line */
+ 			*cp++ = '\001';
+-			getline();
++			getline_();
+ 		    } else
+ 			break;
+ 		}
+@@ -2815,10 +2815,10 @@
+ 		*cp++ = '\001';
+ 		*cp++ = '\014';
+ 		if (!*inbufptr && !commenting_flag) {
+-		    getline();
++		    getline_();
+ 		    while (!*inbufptr) {
+ 			*cp++ = '\001';
+-			getline();
++			getline_();
+ 		    }
+ 		}
+ 		*cp = 0;

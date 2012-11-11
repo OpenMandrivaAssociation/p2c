@@ -1,0 +1,10 @@
+--- p2c-1.22/src/p2clib.c.memcpy	1999-03-16 16:28:20.000000000 +0100
++++ p2c-1.22/src/p2clib.c	2009-04-11 09:32:39.000000000 +0200
+@@ -64,6 +64,7 @@
+ 
+ 
+ #ifdef __STDC__
++Anyptr my_memcpy(Anyptr d, Const Anyptr s, size_t n);
+ Anyptr my_memmove(Anyptr d, Const Anyptr s, size_t n)
+ #else
+ Anyptr my_memmove(d, s, n)
