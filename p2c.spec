@@ -3,10 +3,11 @@
 Summary:	A Pascal to C translator
 Name:		%{name}
 Version:	%{version}
-Release:	%mkrel 20
+Release:	21
 License:	GPL
 Group:		Development/Other
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
+Source100:	p2c.rpmlintrc
 URL:		http://www.synaptics.com/people/daveg/
 Patch2:		p2c-newpatch.patch
 # Fixes conflicting types for 'my_memcpy' build error: thanks Anssi
