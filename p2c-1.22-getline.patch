@@ -1,5 +1,5 @@
---- src/parse.c~	1999-03-16 16:28:20.000000000 +0100
-+++ src/parse.c	2009-10-04 09:06:00.000000000 +0200
+--- ./src/parse.c~	1999-03-16 16:28:20.000000000 +0100
++++ ./src/parse.c	2009-10-04 09:06:00.000000000 +0200
 @@ -5081,7 +5081,7 @@
  	out_include(fname, 1);
      outsection(majorspace);
@@ -9,8 +9,8 @@
      gettok();
  }
  
---- src/p2c.hdrs~	1999-03-16 16:28:20.000000000 +0100
-+++ src/p2c.hdrs	2009-10-04 09:05:42.000000000 +0200
+--- ./src/p2c.hdrs~	1999-03-16 16:28:20.000000000 +0100
++++ ./src/p2c.hdrs	2009-10-04 09:05:42.000000000 +0200
 @@ -169,7 +169,7 @@
  extern void     clearprogress      PV();
  extern void     progress           PV();
@@ -20,8 +20,8 @@
  extern void     push_input_file    PP( (FILE *fp, char *fname, int isinclude) );
  extern void     include_as_import  PV();
  extern void     push_input_strlist PP( (Strlist *sp, char *fname) );
---- src/lex.c~	1999-03-16 16:28:20.000000000 +0100
-+++ src/lex.c	2009-10-04 09:07:07.000000000 +0200
+--- ./src/lex.c~	1999-03-16 16:28:20.000000000 +0100
++++ ./src/lex.c	2009-10-04 09:07:07.000000000 +0200
 @@ -1045,7 +1045,7 @@
  
  

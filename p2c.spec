@@ -1,19 +1,16 @@
-%define	name	p2c
-%define	version	1.22
 Summary:	A Pascal to C translator
-Name:		%{name}
-Version:	%{version}
+Name:		p2c
+Version:	1.22
 Release:	21
-License:	GPL
+License:	GPLv2
 Group:		Development/Other
+Url:		http://www.synaptics.com/people/daveg/
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
 Source100:	p2c.rpmlintrc
-URL:		http://www.synaptics.com/people/daveg/
 Patch2:		p2c-newpatch.patch
 # Fixes conflicting types for 'my_memcpy' build error: thanks Anssi
 Patch3:		p2c-1.22-memcpy.patch
 Patch4:		p2c-1.22-getline.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 P2c is a system for translating Pascal programs into the C language.
@@ -35,13 +32,9 @@ Group:		Development/Other
 The p2c-devel package contains the files necessary for development
 of the p2c Pascal to C translation system.
 
-Install the p2c-devel package if you want to do p2c development.
-
 %prep
 %setup -q
-%patch2 -p1 -b .new
-%patch3 -p1 -b .memcpy
-%patch4 -p0 -b .getline
+%apply_patches
 mkdir src/shlib
 mkdir include
 ln -s ../src include/p2c
@@ -52,136 +45,16 @@ make RPM_OPTS="$RPM_OPT_FLAGS -fPIC"
 make RPM_OPTS="$RPM_OPT_FLAGS -fPIC" shlib -C src
 
 %install
-rm -rf %{buildroot}
 mkdir -p %{buildroot}{%{_mandir}/man1,%{_prefix}/lib,%{_libdir},%{_includedir}}
-make install RPM_INSTALL=%{buildroot} LIBDIR=$RPM_BUILD_ROOT%{_libdir} MANDIR=$RPM_BUILD_ROOT%{_mandir}/man1
-
-%if %mdkversion < 200900
-%post -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
+make install RPM_INSTALL=%{buildroot} LIBDIR=%{buildroot}%{_libdir} MANDIR=%{buildroot}%{_mandir}/man1
 
 %files
-%defattr(-,root,root)
-#%doc %_docdir/p2c-1.22
 %{_bindir}/*
-%{_libdir}/libp2c.so*
+%{_libdir}/libp2c.so.*
 %{_prefix}/lib/p2c
 %{_mandir}/man1/p2c.1*
 
 %files devel
-%defattr(-,root,root)
 %{_libdir}/libp2c.a
 %{_includedir}/p2c
 
-
-%changelog
-* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.22-19mdv2011.0
-+ Revision: 666972
-- mass rebuild
-
-* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 1.22-18mdv2011.0
-+ Revision: 607048
-- rebuild
-
-* Wed Mar 17 2010 Oden Eriksson <oeriksson@mandriva.com> 1.22-17mdv2010.1
-+ Revision: 523544
-- rebuilt for 2010.1
-
-* Sun Oct 04 2009 Funda Wang <fwang@mandriva.org> 1.22-16mdv2010.0
-+ Revision: 453307
-- fix getline conflicts
-
-* Sat Apr 11 2009 Funda Wang <fwang@mandriva.org> 1.22-15mdv2009.1
-+ Revision: 365982
-- rediff memcpy patch
-
-* Tue Jun 17 2008 Thierry Vignaud <tv@mandriva.org> 1.22-15mdv2009.0
-+ Revision: 223406
-- rebuild
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Tue Mar 04 2008 Oden Eriksson <oeriksson@mandriva.com> 1.22-14mdv2008.1
-+ Revision: 179115
-- rebuild
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - kill re-definition of %%buildroot on Pixel's request
-
-* Fri Jun 08 2007 Adam Williamson <awilliamson@mandriva.org> 1.22-13mdv2008.0
-+ Revision: 37052
-- bunzip2 patch; fix build (patch3); rebuild for new era
-- Import p2c
-
-
-
-
-* Tue May 03 2005 Per Ã˜yvind Karlsen <pkarlsen@mandriva.com> 1.22-12mdk
-- compile with -fPIC (fixes build on x86_64)
-- fix lib64 path
-- let rpm take care of stripping binaries and bzip2'ing man pages
-- fix summary-ended-with-dot
-- cosmetics
-
-* Wed Jul 23 2003 Per Øyvind Karlsen <peroyvind@sintrax.net> 1.22-11mdk
-- rebuild
-- macroize
-- fix install
-
-* Thu Jan 16 2003 Daouda LO <daouda@mandrakesoft.com> 1.22-10mdk
-- rebuild (glibc and/or unpackaged files)
-- new URL
-- GPL license
-
-* Sun Feb  3 2002 Daouda LO <daouda@mandrakesoft.com> 1.22-9mdk
-- rebuild ( cleanup - URL tag ... )
-
-* Tue Mar 6 2001 Daouda Lo <daouda@mandrakesoft.com> 1.22-8mdk
-- spec clean up
-- rebuild -> add p2cc
-- replace buildroot dir
-
-* Tue Aug 29 2000 Etienne Faure <etienne@mandrakesoft.com> 1.22-7mdk
-- use _mandir macro
-
-* Mon Apr  3 2000 Adam Lebsack <adam@mandrakesoft.com> 1.22-6mdk
-- Release build.
-
-* Mon Nov 29 1999 Axalon Bloodstone <axalon@linux-mandrake.com>
-- move defattr to before doc
-
-* Wed May 05 1999 Bernhard Rosenkraenzer <bero@mandrakesoft.com>
-- Mandrake adaptions
-
-* Mon Apr 12 1999 Preston Brown <pbrown@redhat.com>
-- fixed group.
-
-* Sun Mar 21 1999 Michael Maher <mike@redhat.com>
-- Merged patched tar ball on gribble with original 
-  installation.  Was missing important parts of 
-  make files.  
-- Fixed many errors in Makefiles. 
-- moved 'basic' stuff into doc
-
-* Fri Dec 18 1998 Cristian Gafton <gafton@redhat.com>
-- build for glibc 2.1
-- buildroot
-- binary files and man page should really be in the main package, 
-  not -devel
-
-* Tue May 05 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Thu Jul 10 1997 Erik Troan <ewt@redhat.com>
-- built against glibc
