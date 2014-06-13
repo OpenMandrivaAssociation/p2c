@@ -1,7 +1,7 @@
 Summary:	A Pascal to C translator
 Name:		p2c
 Version:	1.22
-Release:	25
+Release:	26
 License:	GPLv2
 Group:		Development/Other
 Url:		http://www.synaptics.com/people/daveg/
