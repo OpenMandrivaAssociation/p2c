@@ -1,3 +1,5 @@
+%define debug_package %nil
+
 Summary:	A Pascal to C translator
 Name:		p2c
 Version:	1.22
@@ -41,8 +43,8 @@ ln -s ../src include/p2c
 
 %build
 cp src/sys.p2crc src/p2crc
-make RPM_OPTS="$RPM_OPT_FLAGS -fPIC"
-make RPM_OPTS="$RPM_OPT_FLAGS -fPIC" shlib -C src
+%make RPM_OPTS="%{optflags} -fPIC"
+%make RPM_OPTS="%{optflags} -fPIC" shlib -C src
 
 %install
 mkdir -p %{buildroot}{%{_mandir}/man1,%{_prefix}/lib,%{_libdir},%{_includedir}}
