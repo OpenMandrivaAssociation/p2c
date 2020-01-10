@@ -36,7 +36,7 @@ of the p2c Pascal to C translation system.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 mkdir src/shlib
 mkdir include
 ln -s ../src include/p2c
