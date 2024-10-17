@@ -6,7 +6,7 @@ Version:	1.22
 Release:	30
 License:	GPLv2
 Group:		Development/Other
-Url:		http://www.synaptics.com/people/daveg/
+Url:		https://www.synaptics.com/people/daveg/
 Source0:	ftp://csvax.cs.caltech.edu/pub/p2c-1.22.tar.bz2
 Source100:	p2c.rpmlintrc
 Patch2:		p2c-newpatch.patch
