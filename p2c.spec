@@ -14,6 +14,7 @@ Patch2:		p2c-newpatch.patch
 Patch3:		p2c-1.22-memcpy.patch
 Patch4:		p2c-1.22-getline.patch
 
+BuildRequires:	make
 %description
 P2c is a system for translating Pascal programs into the C language.
 P2c accepts input source files in certain Pascal dialects:  HP
